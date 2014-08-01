@@ -1,0 +1,229 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+
+
+<!-- <?PHP include_once ('../php/networkAnalysis/viewUserInfo.php');?> -->
+
+
+<?PHP
+//header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+//현재 페이지에만 임의로 1800을 줍니다.
+session_start();
+?>
+
+<?php
+//include_once ('../php/config.php');
+// $DB['host']='172.16.100.61';
+// $DB['db']='TestSGdb';
+// $DB['id']='root';
+// $DB['pw']='aaaaaa';
+
+//$host="172.16.100.61";
+//$host="192.168.19.128";
+$host="localhost";
+$user="root";
+$password="aaaaaa";
+$conn=mysql_connect($host, $user, $password);
+$SGdb="SGdb";
+$FAdb="FAdb";
+
+mysql_query('set names utf8');
+mysql_select_db($FAdb, $conn);
+
+$q="select * from USER";
+$q="SELECT * FROM NOTICE";
+$q="SELECT * FROM FILE_LOG";
+
+                         //test 테이블의 레코드를 모두 뽑아오기
+$sql_result=mysql_query($q, $conn);          //질의(위 내용)를 수행하라.
+
+
+$count=mysql_num_rows($sql_result);          //mysql_num_rows() 함수 : 행의 개수를 세는 함수.
+// echo $count;     //mysql query 수행 후 반환되는 결과값을 매개변수로 받고 그 레코드의 개수를 반환
+
+// echo "<br><br>";
+
+//mysql_result(쿼리실행결과, 행번호, 변수값) : 결과값을 행 단위로 화면에 출력해주는 함수.
+
+for($i=0; $i<$count; $i++)
+{
+    $dbUSER_ID[$i]=mysql_result($sql_result, $i, USER_ID);
+    $dbEVENT_TYPE[$i]=mysql_result($sql_result, $i, EVENT_TYPE);
+    $dbEVENT_TIME[$i]=mysql_result($sql_result, $i, EVENT_TIME);
+    $dbOLD_FILE_PATH[$i]=mysql_result($sql_result, $i, OLD_FILE_PATH);
+    $dbOLD_FILE_NAME[$i]=mysql_result($sql_result, $i, OLD_FILE_NAME);    
+    $dbNEW_FILE_PATH[$i]=mysql_result($sql_result, $i, NEW_FILE_PATH);
+    $dbNEW_FILE_NAME[$i]=mysql_result($sql_result, $i, NEW_FILE_NAME);
+    $dbREADONLY[$i]=mysql_result($sql_result, $i, READONLY);
+    $dbHIDDEN[$i]=mysql_result($sql_result, $i, HIDDEN);
+    $dbSYSTEM[$i]=mysql_result($sql_result, $i,SYSTEM);
+    $dbDIRECTORY[$i]=mysql_result($sql_result, $i, DIRECTORY);
+    $dbARCHIVE[$i]=mysql_result($sql_result, $i, ARCHIVE);
+    $dbDEVICE[$i]=mysql_result($sql_result, $i, DEVICE);
+    $dbNORMAL[$i]=mysql_result($sql_result, $i, NORMAL);
+    $dbTEMPORARY[$i]=mysql_result($sql_result, $i, TEMPORARY);
+    $dbSPARSE_FILE[$i]=mysql_result($sql_result, $i, SPARSE_FILE);
+    $dbREPARSE_POINT[$i]=mysql_result($sql_result, $i, REPARSE_POINT);
+    $dbCOMPRESSED[$i]=mysql_result($sql_result, $i, COMPRESSED);
+    $dbOFFLINE[$i]=mysql_result($sql_result, $i, OFFLINE);
+    $dbNOT_CONTENT_INDEXED[$i]=mysql_result($sql_result, $i, NOT_CONTENT_INDEXED);
+    $dbENCRYPTED[$i]=mysql_result($sql_result, $i, ENCRYPTED);
+    $dbINTEGRITY_STREAM[$i]=mysql_result($sql_result, $i, INTEGRITY_STREAM);
+    $dbVIRTUAL[$i]=mysql_result($sql_result, $i, VIRTUAL);
+    $dbNO_SCRUB_DATA[$i]=mysql_result($sql_result, $i, NO_SCRUB_DATA);
+    $dbMD5_HASH[$i]=mysql_result($sql_result, $i, MD5_HASH);
+}
+
+?>
+
+
+<body>
+<!-- <?PHP include_once ('../php/networkAnalysis/viewUserInfo_Table.php');?> -->
+	
+<?PHP
+echo "
+	<div id=\"tablewrapper\">
+		<div id=\"tableheader\">
+        	<div class=\"search\">
+                <select id=\"columns\" onchange=\"sorter.search('query')\"></select>
+                <input type=\"text\" id=\"query\" onkeyup=\"sorter.search('query')\" />
+            </div>
+            <span class=\"details\">
+				<div>Records <span id=\"startrecord\"></span>-<span id=\"endrecord\"></span> of <span id=\"totalrecords\"></span></div>
+        		<div><a href=\"javascript:sorter.reset()\">reset</a></div>
+        	</span>
+        </div>
+        <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" id=\"table\" class=\"tinytable\">
+            <thead>
+                <tr>
+                    <th><h3>사용자</h3></th>
+                    <th><h3>이벤트 종류</h3></th>
+                    <th><h3>이벤트 시간</h3></th>
+                    <th><h3>이전 파일 경로</h3></th>
+                    <th><h3>이전 파일 이름</h3></th>
+                    <th><h3>새 파일 경로</h3></th>
+					<th><h3>새 파일 이름</h3></th>
+					<th><h3>READONLY</h3></th>
+					<th><h3>HIDDEN</h3></th>
+					<th><h3>SYSTEM</h3></th>
+					<th><h3>DIRECTORY</h3></th>
+					<th><h3>ARCHIVE</h3></th>
+					<th><h3>DEVICE</h3></th>
+					<th><h3>NORMAL</h3></th>
+					<th><h3>TEMPORARY</h3></th>
+					<th><h3>SPARSE_FILE</h3></th>
+					<th><h3>REPARSE_POINT</h3></th>
+					<th><h3>COMPRESSED</h3></th>
+					<th><h3>OFFLINE</h3></th>
+					<th><h3>NOT_CONTENT_INDEXED</h3></th>
+					<th><h3>ENCRYPTED</h3></th>
+					<th><h3>INTEGRITY_STREAM</h3></th>
+					<th><h3>VIRTUAL</h3></th>
+					<th><h3>NO_SCRUB_DATA</h3></th>
+					<th><h3>MD5_HASH</h3></th>
+                </tr>
+            </thead>
+		<tbody>
+		";
+		for($i=0; $i<$count; $i++){
+echo "			<tr>
+			<td>$dbUSER_ID[$i]</td>
+			<td>$dbEVENT_TYPE[$i]</td>
+			<td>$dbEVENT_TIME[$i]</td>	
+			<td>$dbOLD_FILE_PATH[$i]</td>
+			<td>$dbOLD_FILE_NAME[$i]</td>
+			<td>$dbNEW_FILE_PATH[$i]</td>
+			<td>$dbNEW_FILE_NAME[$i]</td>
+			<td>$dbREADONLY[$i]</td>
+			<td>$dbHIDDEN[$i]</td>
+			<td>$dbSYSTEM[$i]</td>
+			<td>$dbDIRECTORY[$i]</td>
+			<td>$dbARCHIVE[$i]</td>
+			<td>$dbNORMAL[$i]</td>
+			<td>$dbTEMPORARY[$i]</td>
+			<td>$dbSPARSE_FILE[$i]</td>
+			<td>$dbREPARSE_POINT[$i]</td>
+			<td>$dbCOMPRESSED[$i]</td>
+			<td>$dbOFFLINE[$i]</td>
+			<td>$dbNOT_CONTENT_INDEXED[$i]</td>
+			<td>$dbENCRYPTED[$i]</td>
+			<td>$dbINTEGRITY_STREAM[$i]</td>
+			<td>$dbVIRTUAL[$i]</td>
+			<td>$dbNO_SCRUB_DATA[$i]</td>
+			<td>$dbMD5_HASH[$i]</td>
+			</tr>
+        		";
+		}
+echo "
+            </tbody>
+        </table>
+        <div id=\"tablefooter\">
+          <div id=\"tablenav\">
+            	<div>
+                    <img src=\"../img/viewTable/first.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1,true)\" />
+                    <img src=\"../img/viewTable/previous.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1)\" />
+                    <img src=\"../img/viewTable/next.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(1)\" />
+                    <img src=\"../img/viewTable/last.gif\" width=\"16\" height=\"16\" alt=\"Last Page\" onclick=\"sorter.move(1,true)\" />
+                </div>
+                <div>
+                	<select id=\"pagedropdown\"></select>
+				</div>
+                <div>
+                	<a href=\"javascript:sorter.showall()\">view all</a>
+                </div>
+            </div>
+			<div id=\"tablelocation\">
+            	<div>
+                    <select onchange=\"sorter.size(this.value)\">
+                    <option value=\"5\">5</option>
+                        <option value=\"10\" selected=\"selected\">10</option>
+                        <option value=\"20\">20</option>
+                        <option value=\"50\">50</option>
+                        <option value=\"100\">100</option>
+                    </select>
+                    <span>Entries Per Page</span>
+                </div>
+                <div class=\"page\">Page <span id=\"currentpage\"></span> of <span id=\"totalpages\"></span></div>
+            </div>
+        </div>
+    </div>
+    "
+?>
+	<script type="text/javascript" src="../js/viewTable/script.js"></script>
+	<script type="text/javascript">
+	var sorter = new TINY.table.sorter('sorter','table',{
+		headclass:'head',
+		ascclass:'asc',
+		descclass:'desc',
+		evenclass:'evenrow',
+		oddclass:'oddrow',
+		evenselclass:'evenselected',
+		oddselclass:'oddselected',
+		paginate:true,
+		size:30,
+		colddid:'columns',
+		currentid:'currentpage',
+		totalid:'totalpages',
+		startingrecid:'startrecord',
+		endingrecid:'endrecord',
+		totalrecid:'totalrecords',
+		hoverid:'selectedrow',
+		pageddid:'pagedropdown',
+		navid:'tablenav',
+		sortcolumn:1,
+		sortdir:1,
+		sum:[8],
+		avg:[6,7,8,9],
+		columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
+		init:true
+	});
+  </script>
+  <br><br><br><br>
+</body>

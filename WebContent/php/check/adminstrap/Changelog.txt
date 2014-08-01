@@ -1,0 +1,18 @@
+= V1.0 - 27.09.2012 =
+* Initial Release
+
+= V1.1 - 03.10.2012 =
+* Added Changelog.txt
+* Fixed supersized plugin image_path
+* Updated BootstrapImageGallery from 2.8 to 2.8.1
+* Added bootstrap-transition.js in gallery.html
+
+= V1.2 - 05.10.2012 =
+* Added all boostrap js
+* Added bootstrap-wysihtml5
+* Added datepicker
+* Added widget header title text shadow
+* Added forms page
+* Update login UI
+* Update user profile UI
+* Update report page UI

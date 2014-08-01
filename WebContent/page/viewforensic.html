@@ -1,0 +1,196 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+<!-- Example File -->
+<link rel="stylesheet" type="text/css"
+	href="../css/viewforensic/style.css">
+<link rel="stylesheet" type="text/css" media="../css/viewforensic/print"
+	href="print.css">
+	
+<style type="text/css">
+button.css3button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 10px 20px;
+	background: -moz-linear-gradient(top, #a3a3a3 0%, #3b3b3b 50%, #242424 50%, #000000);
+	background: -webkit-gradient(linear, left top, left bottom, from(#a3a3a3),
+		color-stop(0.50, #3b3b3b), color-stop(0.50, #242424), to(#000000));
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #000000;
+	-moz-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px
+		rgba(255, 255, 255, 0.6);
+	-webkit-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px
+		1px rgba(255, 255, 255, 0.6);
+	box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px
+		rgba(255, 255, 255, 0.6);
+	text-shadow: 0px -1px 0px rgba(000, 000, 000, 1), 0px 1px 0px
+		rgba(255, 255, 255, 0.2);
+}
+</style>
+
+<body>
+		<div style="top: 50px; right: 50px; position: absolute;">
+			<button type="button" name="" value="" class="css3button"
+					onClick="window.print()">Print Page</button> 
+			</div>	
+	<br>
+	<div id="printForensic">
+		<article>
+			<h1>
+				사건 보고서 <span>Security Gate</span>
+			</h1>
+			<section>
+				<h2>Personal Information</h2>
+
+				<dl>
+					<dt>Address:</dt>
+					<dd>
+						Major Street 1b<br>1000AB Amsterdam
+					</dd>
+					<dt>Phone&nbsp;number:</dt>
+					<dd>06-12345678</dd>
+					<dt>Email&nbsp;address:</dt>
+					<dd>john@doe.example</dd>
+					<dt>Date of birth:</dt>
+					<dd>January 1st 1970</dd>
+				</dl>
+			</section>
+
+			<section>
+				<h2>Profile</h2>
+
+				<p>A short introduction about Joe. Joe is a highly motivated and
+					super intelligent worker capable of just about anything.</p>
+			</section>
+			<section>
+				<h2>Work experience</h2>
+				<ol>
+					<li>
+						<p class="period">2008 - Present</p>
+
+						<h3>Rockstar developer</h3>
+						<h4>SomeCompany, LLC</h4>
+
+						<p>Description of the job, list of responsibilities.</p>
+
+						<p>Some special skills developed while on the job.</p>
+					</li>
+					<li>
+						<p class="period">2006 - 2008</p>
+
+						<h3>Regular developer</h3>
+
+						<h4>Yet Another Company, LLC</h4>
+
+						<p>Description of the job, list of responsibilities.</p>
+
+						<p>Some special skills developed while on the job.</p>
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Education</h2>
+				<ol>
+					<li>
+						<p class="period multiline">2005 - 2007</p>
+
+						<h3>M.Sc. Computer Science</h3>
+						<h4>Delft University of Technology</h4>
+
+						<p class="description">Notable facts.</p>
+					</li>
+					<li>
+						<p class="period">
+							2002 - 2005<br>
+						</p>
+
+						<h3>B.Sc. Computer Science</h3>
+						<h4>Delft University of Technology</h4>
+
+						<p class="description">
+							Minored in High Energy Physics.<br> B.Sc. thesis: "Using
+							everyday kitchen appliances for High Performance Computing in a
+							distributed environment".
+						</p>
+					</li>
+
+					<li>
+						<p class="period">1996 - 2002</p>
+
+						<h3>High school</h3>
+						<h4>Some school, Amsterdam</h4>
+
+						<p class="description">Some additional description</p>
+					</li>
+				</ol>
+			</section>
+
+			<section class="pagebreak">
+				<h2>Skills</h2>
+
+				<section>
+					<h3>Programming langauges</h3>
+
+					<p>Experience with the following programming languages:</p>
+
+					<ul>
+						<li>C</li>
+						<li>Java</li>
+						<li>JavaScript</li>
+						<li>PHP</li>
+						<li>Ruby</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Frameworks & libraries</h3>
+
+					<p>Experience with the following frameworks and libraries:</p>
+					<ul>
+						<li>CodeIgniter</li>
+						<li>JUnit</li>
+						<li>jQuery</li>
+						<li>RSpec</li>
+						<li>Ruby on Rails</li>
+						<li>Sinatra</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Languages</h2>
+					<dl>
+						<dt>Dutch</dt>
+						<dd>Mother tongue</dd>
+						<dt>English</dt>
+						<dd>Fluent in conversation, reading and writing</dd>
+					</dl>
+				</section>
+			</section>
+
+			<section>
+				<h2>Additional information</h2>
+
+				<section>
+					<h3>Personal interests & miscellaneous</h3>
+
+					<p>List of hobbies and additional information</p>
+				</section>
+
+				<section>
+					<h3>References</h3>
+
+					<p>Reference are available upon request.</p>
+				</section>
+			</section>
+		</article>
+	</div>
+</body>

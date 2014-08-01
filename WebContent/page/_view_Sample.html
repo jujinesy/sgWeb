@@ -1,0 +1,49 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="SecurityGate"
+	content="방화벽, SecurityGate, firewall, 케로베로스, Cerberus" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Gate</title>
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortchut icon" href="../img/common/icon_firewall.png" />
+<link rel="apple-touch-icon" href="../img/common/icon_firewall.png" />
+
+<!--scripts-->
+<script type="text/javascript" src="../js/common/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"
+	src="../js/common/jquery-ui-1.8.16.custom.min.js"></script>
+
+<!-- CSS Files -->
+<link type="text/css" href="../css/common/base.css" rel="stylesheet" />
+<link type="text/css" href="../css/common/jquery-ui-1.8.16.custom.css"
+	rel="stylesheet" />
+
+
+<!-- Example File -->
+</head>
+<body>
+	<div id="container">
+		<div id="top-container">
+			<?PHP echo $_SESSION["session__id"]; ?>
+			로그인 <a href="./index.html" class="button" id="logOut" type="button">Log
+				Out</a>
+		</div>
+		<div id="left-container">
+			<?PHP include "./sideMenu/sideMenu.html" ?>
+		</div>
+		<div id="center-container"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+<script>
+var num;
+var Qcount;
+
+var USER_ID = new Array();
+var USER_NICKNAME = new Array();
+var IP_ADDRESS = new Array();
+var MACK_ADDRESS = new Array();
+var GATEWAY = new Array();
+var E_MAIL = new Array();
+var BLACK_FLAG = new Array();
+
+var USER_BYTE_COUNT_SRC = new Array();
+var USER_PACKET_COUNT_SRC = new Array();
+var USER_START_TIME_SRC = new Array();
+
+var USER_BYTE_COUNT_DST = new Array();
+var USER_PACKET_COUNT_DST = new Array();
+var USER_START_TIME_DST  = new Array();
+</script>
+<?PHP include_once ('../php/networkAnalysis/viewUserTrafficAnalysis.php');?>
+<script src="../js/networkAnalysis/amcharts.js" type="text/javascript"></script>
+<script src="../js/networkAnalysis/serial.js" type="text/javascript"></script>
+<script src="../js/networkAnalysis/viewUserTrafficAnalysis.js"
+	type="text/javascript"></script>
+<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+
+<body>
+	<div style="width: 100%; height: 100%; position: relative;">
+			<div
+			style="width: 50%; height: 5%; position: absolute; position: absolute; text-align: center;">
+			<h4>Byte Count(KB)</h4>
+		</div>
+		<div id="chartdivVUTA1"
+			style="width: 50%; height: 95%; overflow: hidden; position: absolute; text-align: left;"></div>
+		<div
+			style="width: 50%; height: 5%; position: absolute; position: absolute; right: 0%; text-align: center;">
+			<h4>Packet Count</h4>
+		</div>
+		<div id="chartdivVUTA2"
+			style="width: 50%; height: 95%; overflow: hidden; position: absolute; right: 0%; text-align: left;"></div>
+
+	</div>
+
+	<?PHP include_once ('../php/networkAnalysis/viewUserTrafficAnalysis_Table.php');?>
+	<script type="text/javascript" src="../js/viewTable/script.js"></script>
+	<script type="text/javascript">
+		var sorter = new TINY.table.sorter('sorter', 'table', {
+			headclass : 'head',
+			ascclass : 'asc',
+			descclass : 'desc',
+			evenclass : 'evenrow',
+			oddclass : 'oddrow',
+			evenselclass : 'evenselected',
+			oddselclass : 'oddselected',
+			paginate : true,
+			size : 40,
+			colddid : 'columns',
+			currentid : 'currentpage',
+			totalid : 'totalpages',
+			startingrecid : 'startrecord',
+			endingrecid : 'endrecord',
+			totalrecid : 'totalrecords',
+			hoverid : 'selectedrow',
+			pageddid : 'pagedropdown',
+			navid : 'tablenav',
+			sortcolumn : 1,
+			sortdir : 1,
+			sum : [ 8 ],
+			avg : [ 6, 7, 8, 9 ],
+			columns : [ {
+				index : 7,
+				format : '%',
+				decimals : 1
+			}, {
+				index : 8,
+				format : '$',
+				decimals : 0
+			} ],
+			init : true
+		});
+	</script>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>

@@ -1,0 +1,107 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+
+<!-- Example File -->
+<?PHP include "../php/networkAnalysis/viewProtocolAnalysis.php" ?>
+
+
+<!-- 데이터 받아오기 -->
+<script type="text/javascript">
+	var num;
+
+	var SRC_COUNT = "<?PHP echo ($count); ?>";
+	var DST_COUNT = "<?PHP echo ($count2); ?>";
+
+	var SRC_PORT = new Array();
+	var DST_PORT = new Array();
+	var SRC_PORT_COUNT = new Array();
+	var DST_PORT_COUNT = new Array();
+
+	var TCP_COUNT = "<?PHP echo ($count_TCP); ?>";
+	var UDP_COUNT = "<?PHP echo ($count_UDP); ?>";
+
+	var SRC_PORT_TCP = new Array();
+	var SRC_PORT_COUNT_TCP = new Array();
+	var PROTOCOL_TCP = new Array();
+
+	var SRC_PORT_UDP = new Array();
+	var SRC_PORT_COUNT_UDP = new Array();
+	var PROTOCOL_UDP = new Array();
+</script>
+<?PHP
+  include_once ('../php/networkAnalysis/viewProtocolAnalysis_insert.php');
+?>
+<body>
+	<!--        <table align="center" cellspacing="20">
+            <tr>
+                <td>
+                    <input type="radio" checked="true" name="group" id="rb1" onclick="setLabelPosition()">labels outside
+                    <input type="radio" name="group" id="rb2" onclick="setLabelPosition()">labels inside</td>
+                <td>
+                    <input type="radio" name="group2" id="rb3" onclick="set3D()">3D
+                    <input type="radio" checked="true" name="group2" id="rb4" onclick="set3D()">2D</td>
+                <td>Legend switch type:
+                    <input type="radio" checked="true" name="group3" id="rb5"
+                    onclick="setSwitch()">x
+                    <input type="radio" name="group3" id="rb6" onclick="setSwitch()">v</td>
+            </tr>
+        </table>
+-->
+	<div style="width: 100%; height: 50%; position: relative;">
+		<div style="width: 33%; height: 100%; position: absolute; left: 0%;">
+			<div
+				style="width: 100%; height: 0%; position: absolute; position: absolute; text-align: center;">
+				<h4>TOTAL</h4>
+			</div>
+			<div id="chartdivVPA1" style="width: 100%; height: 95%;"></div>
+		</div>
+		<div style="width: 33%; height: 100%; position: absolute; right: 33.5%;">
+			<div
+				style="width: 100%; height: 0%; position: absolute; position: absolute; text-align: center;">
+				<h4>TCP</h4>
+			</div>
+			<div id="chartdivVPA2" style="width: 100%; height: 95%;"></div>
+		</div>
+		<div style="width: 33%; height: 100%; position: absolute; right: 0%;">
+			<div
+				style="width: 100%; height: 0%; position: absolute; position: absolute; text-align: center;">
+				<h4>UDP</h4>
+			</div>
+			<div id="chartdivVPA3" style="width: 100%; height: 95%;"></div>
+		</div>
+	</div>
+	<div style="width: 100%; height: 50%; position: relative;">
+	<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+	<script type="text/javascript" src="../js/viewTable/script.js"></script>
+		<div style="width: 33%; height: 100%; position: absolute; left: 0%;">
+			<?PHP include_once ('../php/networkAnalysis/viewProtocolAnalysis_Table_Total.php');?>
+			
+			<br>
+			<br> <br>
+			<br>
+
+		</div>
+		<div style="width: 33%; height: 100%; position: absolute; right: 33.5%;">
+					<?PHP include_once ('../php/networkAnalysis/viewProtocolAnalysis_Table_TCP.php');?>
+			
+			<br>
+			<br> <br>
+			<br></div>
+		<div style="width: 33%; height: 100%; position: absolute; right: 0%;">
+					<?PHP include_once ('../php/networkAnalysis/viewProtocolAnalysis_Table_UDP.php');?>
+			
+			<br>
+			<br> <br>
+			<br></div>
+	</div>
+</body>
+<script src="../js/networkAnalysis/amcharts.js" type="text/javascript"></script>
+<script src="../js/networkAnalysis/pie.js" type="text/javascript"></script>
+<script src="../js/networkAnalysis/viewProtocolAnalysis.js"
+	type="text/javascript"></script>

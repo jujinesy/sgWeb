@@ -1,0 +1,308 @@
+<!-- select a.SITE_NAME, a.SITE_IP, a.SITE_URL, b.USER_ID from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR;
+
+
+
+select m.cnt, m.USER_ID, m.rank
+from
+(select t.cnt, t.USER_ID,
+(select count(*) + 1 
+from (select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as i
+where i.cnt > t.cnt) as rank 
+from 
+(select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as t
+ORDER BY rank asc) as m
+where m.rank<5; -->
+
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+
+<script>
+var Qcount;
+var USER_ID = new Array();
+var cnt = new Array();
+
+</script>
+<?php
+include_once ('../php/config.php');
+
+mysql_select_db($SGdb, $conn);
+
+$q2="select m.cnt, m.USER_ID, m.rank
+from
+(select t.cnt, t.USER_ID,
+(select count(*) + 1 
+from (select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as i
+where i.cnt > t.cnt) as rank 
+from 
+(select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as t
+ORDER BY rank asc) as m
+where m.rank<10";  
+                       //test 테이블의 레코드를 모두 뽑아오기
+$sql_result2=mysql_query($q2, $conn);          //질의(위 내용)를 수행하라.
+$count2=mysql_num_rows($sql_result2);          //mysql_num_rows() 함수 : 행의 개수를 세는 함수.
+echo("<script>Qcount='$count2';</script>");
+
+for($i=0; $i<$count2; $i++)
+{
+    $dbUSER_ID[$i]=mysql_result($sql_result2, $i, USER_ID);
+    $dbcnt[$i]=mysql_result($sql_result2, $i, cnt);
+}
+
+
+echo("<script>var num=0;</script>");
+for($i=0; $i<$count2; $i++){
+	echo ("<script>
+			USER_ID[num]='$dbUSER_ID[$i]';
+			cnt[num]='$dbcnt[$i]';
+			</script>");
+	echo("<script>num++;</script>");
+}
+
+?>
+<body>
+	<div id="center-container">
+		<div style="width: 100%; height: 50%; position: relative;">
+			<div id="chartdivVABS1"
+				style="width: 100%; height: 90%; overflow: hidden; position: absolute; text-align: left;"></div>
+			<div
+				style="width: 100%; height: 5%; position: absolute; position: absolute; bottom: 0%; text-align: center;">
+				<h4>차단 사이트 접속현황 TOP 10</h4>
+			</div>
+			<!-- <div id="chartdivVPC2"
+				style="width: 50%; height: 95%; overflow: hidden; position: absolute; right: 0%; text-align: left;"></div>
+			<div
+				style="width: 50%; height: 5%; position: absolute; position: absolute; bottom: 0%; right: 0%; text-align: center;">
+				<h4>DST_PORT</h4>
+			</div> -->
+		</div>
+		<div style="position: relative; width: 100%; height: 50%;">
+			<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />			
+			
+			<?php 
+$NO=1;
+echo "
+		<div id=\"tablewrapper\">
+		<div id=\"tableheader\">
+		<div class=\"search\">
+		<select id=\"columns\" onchange=\"sorter.search('query')\"></select>
+		<input type=\"text\" id=\"query\" onkeyup=\"sorter.search('query')\" />
+		</div>
+		<span class=\"details\">
+		<div>Records <span id=\"startrecord\"></span>-<span id=\"endrecord\"></span> of <span id=\"totalrecords\"></span></div>
+		<div><a href=\"javascript:sorter.reset()\">reset</a></div>
+		</span>
+		</div>
+		<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" id=\"table\" class=\"tinytable\">
+		<thead>
+		<tr>
+		<th><h3>No</h3></th>
+		<th><h3>사이트 이름</h3></th>
+		<th><h3>사이트 아이피</h3></th>
+		<th><h3>사이트 URL</h3></th>
+		<th><h3>접속한 사용자</h3></th>
+		</tr>
+		</thead>
+		<tbody>
+		";
+
+
+
+
+$q="select a.SITE_NAME, a.SITE_IP, a.SITE_URL, b.USER_ID from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR";                         //test 테이블의 레코드를 모두 뽑아오기
+$sql_result=mysql_query($q, $conn);          //질의(위 내용)를 수행하라.
+$count=mysql_num_rows($sql_result);          //mysql_num_rows() 함수 : 행의 개수를 세는 함수.
+
+
+
+for($i=0; $i<$count; $i++)
+{
+    $dbSITE_NAME[$i]=mysql_result($sql_result, $i, SITE_NAME);
+    $dbSITE_IP[$i]=mysql_result($sql_result, $i, SITE_IP);
+    $dbSITE_URL[$i]=mysql_result($sql_result, $i, SITE_URL);
+    $dbUSER_ID[$i]=mysql_result($sql_result, $i, USER_ID);
+}
+
+for($i=0; $i<$count; $i++){
+$tempSITE_IP=long2ip($dbSITE_IP[$i]);
+	echo "		<tr>
+	<td>$NO</td>
+	<td>$dbSITE_NAME[$i]</td>
+	<td>$tempSITE_IP</td>
+	<td>$dbSITE_URL[$i]</td>
+	<td>$dbUSER_ID[$i]</td>
+	</tr>
+	";
+	$NO++;
+}
+
+echo "
+				</tbody>
+				</table>
+				<div id=\"tablefooter\">
+				<div id=\"tablenav\">
+				<div>
+				<img src=\"../img/viewTable/first.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1,true)\" />
+				<img src=\"../img/viewTable/previous.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1)\" />
+				<img src=\"../img/viewTable/next.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(1)\" />
+				<img src=\"../img/viewTable/last.gif\" width=\"16\" height=\"16\" alt=\"Last Page\" onclick=\"sorter.move(1,true)\" />
+				</div>
+				<div>
+				<select id=\"pagedropdown\"></select>
+				</div>
+				<div>
+				<a href=\"javascript:sorter.showall()\">view all</a>
+				</div>
+				</div>
+				<div id=\"tablelocation\">
+				<div>
+				<select onchange=\"sorter.size(this.value)\">
+				<option value=\"5\">5</option>
+				<option value=\"10\" selected=\"selected\">10</option>
+				<option value=\"20\">20</option>
+				<option value=\"50\">50</option>
+				<option value=\"100\">100</option>
+				</select>
+				<span>Entries Per Page</span>
+				</div>
+				<div class=\"page\">Page <span id=\"currentpage\"></span> of <span id=\"totalpages\"></span></div>
+				</div>
+				</div>
+				</div>
+				"
+?>
+
+
+
+
+			<script type="text/javascript" src="../js/viewTable/script.js"></script>
+			<script type="text/javascript">
+				var sorter = new TINY.table.sorter('sorter', 'table', {
+					headclass : 'head',
+					ascclass : 'asc',
+					descclass : 'desc',
+					evenclass : 'evenrow',
+					oddclass : 'oddrow',
+					evenselclass : 'evenselected',
+					oddselclass : 'oddselected',
+					paginate : true,
+					size : 10,
+					colddid : 'columns',
+					currentid : 'currentpage',
+					totalid : 'totalpages',
+					startingrecid : 'startrecord',
+					endingrecid : 'endrecord',
+					totalrecid : 'totalrecords',
+					hoverid : 'selectedrow',
+					pageddid : 'pagedropdown',
+					navid : 'tablenav',
+					sortcolumn : 1,
+					sortdir : 1,
+					sum : [ 8 ],
+					avg : [ 6, 7, 8, 9 ],
+					columns : [ {
+						index : 7,
+						format : '%',
+						decimals : 1
+					}, {
+						index : 8,
+						format : '$',
+						decimals : 0
+					} ],
+					init : true
+				});
+			</script>
+			 <br><br> <br><br><br><br>
+		</div>
+	</div>
+
+</body>
+
+<script src="../js/networkAnalysis/amcharts.js" type="text/javascript"></script>
+<script src="../js/networkAnalysis/serial.js" type="text/javascript"></script>
+<script sype="text/javascript">
+var chart;
+var colorArray = new Array("#FF0F00","#FF6600","#FF9E01","#FCD202","#F8FF01","#B0DE09","#04D215","#0D8ECF","#0D52D1","#2A0CD0","#8A0CCF","#CD0D74");
+var colorNum=1;
+
+var chartData = [
+                 {
+                	 "userID": USER_ID[0],
+                	 "cnt": cnt[0],
+                	 "color": colorArray[0]
+                 }
+                 ];
+for(var i=1; i<Qcount; i++){
+	chartData.push({
+		 "userID": USER_ID[i],
+		 "cnt": cnt[i],
+		 "color": colorArray[colorNum]
+	});
+	colorNum++;
+	if(colorNum==11)colorNum=0;
+}
+
+AmCharts.ready(function () {
+	// SERIAL CHART
+	chart = new AmCharts.AmSerialChart();
+	chart.dataProvider = chartData;
+	chart.categoryField = "userID";
+	chart.startDuration = 1;
+
+	// AXES
+	// category
+	var categoryAxis = chart.categoryAxis;
+	categoryAxis.labelRotation = 45; // this line makes category values to be rotated
+	categoryAxis.gridAlpha = 0;
+	categoryAxis.fillAlpha = 1;
+	categoryAxis.fillColor = "#FAFAFA";
+	categoryAxis.gridPosition = "start";
+
+	// value
+	var valueAxis = new AmCharts.ValueAxis();
+	valueAxis.dashLength = 5;
+	valueAxis.title = "Count";
+	valueAxis.axisAlpha = 0;
+	chart.addValueAxis(valueAxis);
+
+	// GRAPH
+	var graph = new AmCharts.AmGraph();
+	graph.valueField = "cnt";
+	graph.colorField = "color";
+	graph.balloonText = "<b>[[category]]: [[value]]</b>";
+	graph.type = "column";
+	graph.lineAlpha = 0;
+	graph.fillAlphas = 1;
+	chart.addGraph(graph);
+
+	// CURSOR
+	var chartCursor = new AmCharts.ChartCursor();
+	chartCursor.cursorAlpha = 0;
+	chartCursor.zoomable = false;
+	chartCursor.categoryBalloonEnabled = false;
+	chart.addChartCursor(chartCursor);
+
+
+	// WRITE
+	chart.write("chartdivVABS1");
+});
+</script>

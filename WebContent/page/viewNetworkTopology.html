@@ -1,0 +1,123 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+<!-- <meta http-equiv="refresh" content="60; url=./viewNetworkTopology.html"/>  -->
+
+<script type="text/javascript" src="../js/common/handler.js"></script>
+<!--이벤트 핸들러 함수  -->
+<script type="text/javascript">
+	network.connect(wsURI); //이벤트 핸들러 연결
+</script>
+<script type="text/javascript"
+	src="../js/viewNetworkTopology/fullNetwork.js"></script>
+<script type="text/javascript"
+	src="../js/viewNetworkTopology/fullNetworkSub.js"></script>
+<!-- JIT Library File -->
+<script type="text/javascript" src="../js/viewNetworkTopology/jit.js"></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>  <!-- ajax -->
+
+<!-- CSS Files -->
+<link type="text/css" href="../css/common/base.css" rel="stylesheet" />
+<link type="text/css"
+	href="../css/viewNetworkTopology/ForceDirected.css" rel="stylesheet" />
+<!--<link type="text/css" href="../css/common/jquery-ui-1.8.16.custom.css"
+	rel="stylesheet" /> -->
+
+<!-- user 네트워크 정보 -->
+<script type="text/javascript">
+	var managerId = "<?PHP echo $_SESSION["session__id"]; ?>";
+	var exCloud = "cloud";
+
+	var user_dbNO = new Array();
+	var user_dbGROUP_ID = new Array();
+	var user_dbMAC_ADDRESS = new Array();
+	var user_dbOBTAIN_FLAG = new Array();
+	var user_dbIP_ADDRESS = new Array();
+
+	var user_dbUSER_ID = new Array();
+	var user_dbUSER_PASSWORD = new Array();
+	var user_dbBLACK_FLAG = new Array();
+	var user_dbE_MAIL = new Array();
+	var user_dbSUBNET_MASK = new Array();
+
+	var user_dbGATEWAY = new Array();
+	var user_dbBASIC_DNS = new Array();
+	var user_dbSUB_DNS = new Array();
+	var user_dbEVENT_ID = new Array();
+	var user_dbACCEPT = new Array();
+
+	var user_dbUSER_NICKNAME = new Array();
+	
+//	var user_BYTE_COUNT = new Array();
+
+	<?PHP include_once ('../php/viewNetworkTopology/allUser.php');?>
+	var userCount = "<?PHP echo ($count); ?>";
+//	var num = 0;
+</script>
+<!-- server 정보 -->
+<script>
+	var server_dbSERVER_IP = new Array();
+	var server_dbBLACK_FLAT = new Array();
+//	var num3 = 0;
+	var serverKind = 0;    // SERVER 종류
+
+//	var num4 = 0;
+	var server_SERVER_IP = new Array();   // 서버 외부 아이피
+	var server_CONNECT_IP = new Array();  // USER 내부 아이피
+	var server_SERVER_HOST = new Array(); //not yet
+	var server_SERVER_DNS = new Array(); //not yet
+	var serverConnectCount = 0;   // server_SERVER_IP, server_CONNECT_IP 컬럼 수
+	
+	var SERVER_SRC_ADDR = new Array();
+	var SERVER_BYTE_COUNT = new Array();
+	var SERVER_START_TIME = new Array();
+	var SERVER_GETBYTECOUNTQUERY_COUNT=0;
+	var USER_SRC_ADDR = new Array();
+	var USER_BYTE_COUNT = new Array();
+	var USER_START_TIME = new Array();
+	var USER_GETBYTECOUNTQUERY_COUNT=0;
+	
+	var user_byte = new Array();        // node에 들어갈 데이터
+	var user_edgeColor = new Array();   // node에 들어갈 데이터
+	var user_iconType = new Array();    // node에 들어갈 데이터
+	var server_byte = new Array();      // node에 들어갈 데이터
+	var server_edgeColor = new Array(); // node에 들어갈 데이터
+	var server_iconType = new Array();  // node에 들어갈 데이터
+	
+	var tempUserNodeID;    //user메뉴에서 user 정보 눌렀을 때 사용
+	
+	var server_byteCountLimit;     //  byteCount 한계치 경고 할거 설정 - SERVER
+	var server_byteCountLimit_qCount;
+	var user_byteCountLimit;	   //  byteCount 한계치 경고 할거 설정 - USER
+	var user_byteCountLimit_qCount;
+	
+	var bock_SITECOUNT;
+	var bock_SITE_NAME = new Array();
+	var bock_SITE_IP = new Array();
+	var bock_SITE_URL = new Array();
+	
+//	var json;			// reflash 할 때 전에 정보 임시 저장
+//	var fd;
+</script>
+
+<!--  외부 서버 정보, 갯수 구하고 / SERVER - user 연결된것들  정보 가져와서 넣기  -->
+<!--  user 정보 넣기  -->
+<!--  외부 서버, 내부 유저 별로 최신 트래픽양 구하기  -->
+<!--  manager info 정보 가져와서 넣기  -->
+<?PHP
+include_once ('../php/viewNetworkTopology/serverInfo.php');
+  include_once ('../php/viewNetworkTopology/insertInfo.php');
+include_once ('../php/viewNetworkTopology/getByteCount.php');
+  include_once ('../php/viewNetworkTopology/managerInfo.php');
+?>
+
+<body onload="init();">
+	<div id="log" style="top: 30%; left: 0%;"></div>
+	<div id="infovis"></div>
+	<?PHP include "./viewNetworkTopology_popUp.html" ?>
+</body>

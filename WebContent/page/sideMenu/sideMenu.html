@@ -1,0 +1,67 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="./sideMenu/jquery.tree.css" rel="stylesheet" type="text/css">
+<script src="./sideMenu/jquery.tree.js"></script>
+<script>
+      $(document).ready(function(){
+        $('#lista').arvore({checkbox:true});
+        $('#btn_abrir').click(function(){
+          $('#lista').trigger('expandir');
+        });
+        $('#btn_fechar').click(function(){
+          $('#lista').trigger('retrair');
+        });
+      });
+    </script>
+</head>
+<body>
+<!--<dir>
+    <input  class="directionButton"  type="image" src="./sideMenu/upButton.png" value="open" id="btn_fechar">	
+	 <input class="directionButton"  type="image" src="./sideMenu/downButton.png" value="close" id="btn_abrir">
+	 </dir>-->
+	 <div style=" text-align: right; padding-right: 8px;">
+	 	<input class="toggleButton" type="button" value="open" id="btn_abrir"> 
+	<input class="toggleButton" type="button" value="close" id="btn_fechar"> 
+	</div>
+	<div class="lista-arvore">
+		<ul id="lista" style="padding:10px;">
+			<li><a>Network Data Analysis</a>
+				<ul style=" padding-left: 23px; ">
+					<li><a href="./viewNetworkTopology.html" target='centerFrame'>네트워크토폴로지</a></li>
+					<li><a href="./viewUserInfo.html" target='centerFrame'>유저정보</a></li>
+					<li><a href="./viewProtocolClass.html" target='centerFrame'>프로토콜분류</a></li>
+					<li><a href="./viewProtocolAnalysis.html" target='centerFrame'>프로토콜분석</a></li>
+					<li><a href="./viewTrafficAnalysis.html" target='centerFrame'>전체트래픽사용량</a></li>
+					<li><a href="./viewExConnectAnalysis.html" target='centerFrame'>외부트래픽분석</a></li>
+					<li><a href="./viewUserTrafficAnalysis.html" target='centerFrame'> 유저별트래픽분석</a></li>
+					<li><a href="./viewCommunicationAnalysis.html" target='centerFrame'>통신분석</a></li>
+				</ul></li>
+			<li><a>Client Data Analysis</a>
+				<ul style=" padding-left: 23px; ">
+				<li><a href="./viewFileLog.html" target='centerFrame'>파일로그기록</a></li>
+					<li><a href="./viewAccessBlockSite.html" target='centerFrame'>차단사이트접속현황</a></li>
+					<!--<li><a href="./viewforensic.html" target='centerFrame'>유저별상세정보</a></li>-->
+					<li><a href="./viewNotice.html" target='centerFrame'>공지사항</a></li>
+				</ul></li>
+			<li><a>Data Control</a>
+				<ul style=" padding-left: 23px; ">
+				<li><a href="./viewIPSStatus/viewIPSStatus.html" target='centerFrame'>장치상태확인</a></li>
+					<li><a href="./viewRulesetSetting/viewRulesetSetting.html" target='centerFrame'>룰셋관리</a></li>
+					<!--<li><a href="./viewUserInfo.html" target='centerFrame'>그룹관리</a></li>-->
+					<li><a href="./viewBlockUser.html" target='centerFrame'>사용자차단관리</a></li>
+					<li><a href="./viewBlockSiteSetting/viewBlockSiteSetting.html" target='centerFrame'>외부차단관리</a></li>
+					
+				</ul></li>
+		</ul>
+	</div>
+</body>
+</html>

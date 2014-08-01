@@ -1,0 +1,243 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+
+
+<!-- <?PHP include_once ('../php/networkAnalysis/viewUserInfo.php');?> -->
+
+
+<?PHP
+//header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+//현재 페이지에만 임의로 1800을 줍니다.
+session_start();
+?>
+
+<?php
+//include_once ('../php/config.php');
+// $DB['host']='172.16.100.61';
+// $DB['db']='TestSGdb';
+// $DB['id']='root';
+// $DB['pw']='aaaaaa';
+
+//$host="172.16.100.61";
+//$host="192.168.19.128";
+$host="localhost";
+$user="root";
+$password="aaaaaa";
+$conn=mysql_connect($host, $user, $password);
+$SGdb="SGdb";
+$FAdb="FAdb";
+
+mysql_query('set names utf8');
+mysql_select_db($FAdb, $conn);
+
+$q="select * from USER";
+$q="SELECT * FROM NOTICE";
+                         //test 테이블의 레코드를 모두 뽑아오기
+$sql_result=mysql_query($q, $conn);          //질의(위 내용)를 수행하라.
+
+
+$count=mysql_num_rows($sql_result);          //mysql_num_rows() 함수 : 행의 개수를 세는 함수.
+// echo $count;     //mysql query 수행 후 반환되는 결과값을 매개변수로 받고 그 레코드의 개수를 반환
+
+// echo "<br><br>";
+
+//mysql_result(쿼리실행결과, 행번호, 변수값) : 결과값을 행 단위로 화면에 출력해주는 함수.
+
+for($i=0; $i<$count; $i++)
+{
+    $dbIDX[$i]=mysql_result($sql_result, $i, IDX);
+    $dbNOTICE[$i]=mysql_result($sql_result, $i, NOTICE);
+    $dbUSER_ID[$i]=mysql_result($sql_result, $i, USER_ID);
+    $dbTITLE[$i]=mysql_result($sql_result, $i, TITLE);
+    $dbCONTENT[$i]=mysql_result($sql_result, $i, CONTENT);    
+    $dbSEND_TIME[$i]=mysql_result($sql_result, $i, SEND_TIME);
+}
+
+?>
+
+	<script>
+	function addNotice() {
+
+		}
+	
+	
+	
+	
+	
+	
+	
+	</script>
+
+<body>
+<!-- <?PHP include_once ('../php/networkAnalysis/viewUserInfo_Table.php');?> -->
+
+
+
+	<a class="overlay" id="popupUserAddNode_form"></a>	
+	<!-- 	<p>Please enter user details here</p>   action = "write.php?mode=post"  -->
+	<div style=" position: relative; width: 100%; height: 26%; ">
+	<fieldset style=" width: 49%; position: absolute;">
+		<legend> <h2 style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">공지사항 입력</h2>  </legend>
+		<form name = "write_form" method = "post" action = "../php/addNotice.php" >
+			<table class="read_table" cellspacing="">
+				<tr>
+					<td class="class_read" colspan="2"><input type="radio" name="NOTICE" value="YES" onClick="document.all('USER_ID').disabled=true;document.all('USERID').value='';" checked><label for="ID"  autofocus>전체 공지</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="NOTICE" value="NO" onClick="document.all('USER_ID').disabled=false;"><label for="ID" autofocus>사용자 공지(아이디)</label><input type = "text" name = "USER_ID" size = "20" disabled="true" /></td>
+				<!-- alert(document.getElementsByName('all')[0].value) -->
+				</tr>
+				<tr>
+					
+					<td class="class_read" colspan="2"><label for="ID" autofocus>제목 : </label><input type = "text" name = "TITLE" size = "100%" /></td>
+				</tr>
+				<tr>
+					<td class="class_read_content"><label for="ID" autofocus>내용 </label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name = "CONTENT" cols = "100" rows = "5"></textarea></td>
+				</tr>
+			</table>
+			<button onClick="addNotice();">Submit</button>
+		</form>
+	</fieldset>
+		<fieldset style=" width: 49%; position: absolute; right:0%">
+		<legend> <h2 style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">공지사항 입력</h2>  </legend>
+		<form name = "write_form" method = "post" action = "../php/addNotice.php" >
+			<table class="read_table" cellspacing="">
+				<tr>
+					<td class="class_read" colspan="2"><input type="radio" name="NOTICE" value="YES" onClick="document.all('USER_ID').disabled=true;document.all('USERID').value='';" checked><label for="ID"  autofocus>전체 공지</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="NOTICE" value="NO" onClick="document.all('USER_ID').disabled=false;"><label for="ID" autofocus>사용자 공지(아이디)</label><input type = "text" name = "USER_ID" size = "20" disabled="true" /></td>
+				<!-- alert(document.getElementsByName('all')[0].value) -->
+				</tr>
+				<tr>
+					
+					<td class="class_read" colspan="2"><label for="ID" autofocus>제목 : </label><input type = "text" name = "TITLE" size = "100%" /></td>
+				</tr>
+				<tr>
+					<td class="class_read_content"><label for="ID" autofocus>내용 </label></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name = "CONTENT" cols = "100" rows = "5"></textarea></td>
+				</tr>
+			</table>
+			<button onClick="addNotice();">Submit</button>
+		</form>
+	</fieldset>
+	
+	
+	
+</div>
+		
+
+	<a class="close" href="#close"></a>
+	
+	
+	
+	
+<?PHP
+echo "
+	<div id=\"tablewrapper\" style=\" position: relative; \">
+		<div id=\"tableheader\">
+        	<div class=\"search\">
+                <select id=\"columns\" onchange=\"sorter.search('query')\"></select>
+                <input type=\"text\" id=\"query\" onkeyup=\"sorter.search('query')\" />
+            </div>
+            <span class=\"details\">
+				<div>Records <span id=\"startrecord\"></span>-<span id=\"endrecord\"></span> of <span id=\"totalrecords\"></span></div>
+        		<div><a href=\"javascript:sorter.reset()\">reset</a></div>
+        	</span>
+        </div>
+        <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" id=\"table\" class=\"tinytable\">
+            <thead>
+                <tr>
+                    <th><h3>순서</h3></th>
+                    <th><h3>전체공지 여부</h3></th>
+                    <th><h3>사용자 공지(아이디)</h3></th>
+                    <th><h3>제목</h3></th>
+                    <th><h3>내용</h3></th>
+                    <th><h3>보낸 시간</h3></th>
+                </tr>
+            </thead>
+		<tbody>
+		";
+		for($i=0; $i<$count; $i++){
+echo "			<tr>
+			<td>$dbIDX[$i]</td>
+			<td>$dbNOTICE[$i]</td>
+			<td>$dbUSER_ID[$i]</td>	
+			<td>$dbTITLE[$i]</td>
+			<td>$dbCONTENT[$i]</td>
+			<td>$dbSEND_TIME[$i]</td>
+			</tr>
+        		";
+		}
+echo "
+            </tbody>
+        </table>
+        <div id=\"tablefooter\">
+          <div id=\"tablenav\">
+            	<div>
+                    <img src=\"../img/viewTable/first.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1,true)\" />
+                    <img src=\"../img/viewTable/previous.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(-1)\" />
+                    <img src=\"../img/viewTable/next.gif\" width=\"16\" height=\"16\" alt=\"First Page\" onclick=\"sorter.move(1)\" />
+                    <img src=\"../img/viewTable/last.gif\" width=\"16\" height=\"16\" alt=\"Last Page\" onclick=\"sorter.move(1,true)\" />
+                </div>
+                <div>
+                	<select id=\"pagedropdown\"></select>
+				</div>
+                <div>
+                	<a href=\"javascript:sorter.showall()\">view all</a>
+                </div>
+            </div>
+			<div id=\"tablelocation\">
+            	<div>
+                    <select onchange=\"sorter.size(this.value)\">
+                    <option value=\"5\">5</option>
+                        <option value=\"10\" selected=\"selected\">10</option>
+                        <option value=\"20\">20</option>
+                        <option value=\"50\">50</option>
+                        <option value=\"100\">100</option>
+                    </select>
+                    <span>Entries Per Page</span>
+                </div>
+                <div class=\"page\">Page <span id=\"currentpage\"></span> of <span id=\"totalpages\"></span></div>
+            </div>
+        </div>
+    </div>
+    "
+?>
+	<script type="text/javascript" src="../js/viewTable/script.js"></script>
+	<script type="text/javascript">
+	var sorter = new TINY.table.sorter('sorter','table',{
+		headclass:'head',
+		ascclass:'asc',
+		descclass:'desc',
+		evenclass:'evenrow',
+		oddclass:'oddrow',
+		evenselclass:'evenselected',
+		oddselclass:'oddselected',
+		paginate:true,
+		size:30,
+		colddid:'columns',
+		currentid:'currentpage',
+		totalid:'totalpages',
+		startingrecid:'startrecord',
+		endingrecid:'endrecord',
+		totalrecid:'totalrecords',
+		hoverid:'selectedrow',
+		pageddid:'pagedropdown',
+		navid:'tablenav',
+		sortcolumn:1,
+		sortdir:1,
+		sum:[8],
+		avg:[6,7,8,9],
+		columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
+		init:true
+	});
+  </script>
+  <br><br><br><br>
+</body>

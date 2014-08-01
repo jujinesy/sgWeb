@@ -1,0 +1,162 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+session_unset();
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<!--META-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+<meta name="SecurityGate" content="방화벽, SecurityGate, firewall, 케로베로스, Cerberus" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Security Gate</title>
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortchut icon" href="../img/common/icon_firewall.png" />
+<link rel="apple-touch-icon" href="../img/common/icon_firewall.png" />
+
+<!--STYLESHEETS-->
+<link rel="stylesheet" href="../css/index/style.css" type="text/css" />
+<link rel="stylesheet" href="../css/index/login_form.css" type="text/css"/>
+
+<!--SCRIPTS-->
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<!--Slider-in icons-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".username").focus(function() {
+			$(".user-icon").css("left", "-48px");
+		});
+		$(".username").blur(function() {
+			$(".user-icon").css("left", "0px");
+		});
+
+		$(".password").focus(function() {
+			$(".pass-icon").css("left", "-48px");
+		});
+		$(".password").blur(function() {
+			$(".pass-icon").css("left", "0px");
+		});
+	});
+</script>
+
+</head>
+<body>
+
+	<!--WRAPPER-->
+	<div id="wrapper">
+
+		<!--SLIDE-IN ICONS-->
+		<div class="user-icon"></div>
+		<div class="pass-icon"></div>
+		<!--END SLIDE-IN ICONS-->
+
+		<!--LOGIN FORM-->
+		<form name="login-form" class="login-form" action="../php/login.php"
+			method="post">
+
+			<!--HEADER-->
+			<div class="header">
+				<!--TITLE-->
+				<h1>Login</h1>
+				<!--END TITLE-->
+				<!--DESCRIPTION-->
+				<span>Fill out the form below to login.</span>
+				<!--END DESCRIPTION-->
+			</div>
+			<!--END HEADER-->
+
+			<!--CONTENT-->
+			<div class="content">
+				<!--USERNAME-->
+				<input name="username" type="text" class="input username"
+					value="Username" onfocus="this.value=''"/>
+				<!--END USERNAME-->
+				<!--PASSWORD-->
+				<input name="password" type="password" class="input password"
+					value="Password" onfocus="this.value=''" />
+				<!--END PASSWORD-->
+			</div>
+			<!--END CONTENT-->
+
+			<!--FOOTER-->
+			<div class="footer">
+				<!--LOGIN BUTTON-->
+				<input type="submit" name="submit" value="Login" class="button" />
+				<!--END LOGIN BUTTON-->
+				<!--REGISTER BUTTON-->
+				<!-- <input type="submit" name="submit" value="Register" class="register" /> -->
+				<!--END REGISTER BUTTON-->
+				<a href="#join_form" id="join_pop" value="Register" class="register">Register</a>
+			</div>
+			<!--END FOOTER-->
+		</form>
+
+		<!--END LOGIN FORM-->
+
+	</div>
+	<!--END WRAPPER-->
+
+	<!-- popup form -->
+	<a href="#x" class="overlay" id="join_form"></a>
+	<div class="popup">
+		<form name="singup_form" method="post" action="../php/signup.php">
+			<h2
+				style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">Sign
+				Up</h2>
+			<p>Please enter your details here</p>
+			<fieldset>
+				<legend> 개인 정보 </legend>
+				<div>
+					<label for="ID" autofocus>ID</label> <input type="text"
+						name="USER_ID" id="userId" value="" required="required"
+						autocomplete="on" maxlength="10" autofocus />
+				</div>
+				<div>
+					<label for="pass">Password</label> <input type="password"
+						name="USER_PASSWORD" id="userPassword" value=""
+						required="required" autocomplete="off" maxlength="10" />
+				</div>
+				<div>
+					<label for="name">Nick Name</label> <input type="text"
+						name="USER_NICKNAME" id="userNickName" value=""
+						required="required" autocomplete="off" maxlength="10" />
+				</div>
+				<div>
+					<label for="email" autofocus>E-mail</label> <input type="text"
+						name="E_MAIL" id="userEmail" value="" required="required"
+						autocomplete="off" />
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend> 주소 설정 </legend>
+				<div>
+					<label for="ipAddress">IP 주소</label> <input type="text"
+						name="IP_ADDRESS" id="ipAddress" value="" required="required"
+						maxlength="15" placeholder="---.---.---.---" />
+				</div>
+				<div>
+					<label for="macAddress">MAC 주소</label> <input type="text"
+						name="MAC_ADDRESS" id="macAddress" value="" required="required"
+						maxlength="17" placeholder="00-00-00-00-00-00" />
+				</div>
+			</fieldset>
+			<!-- <input type="button" value="Sign Up" /> -->
+			<fieldset style="text-align: right;">
+				<button type="submit">Submit</button>
+			</fieldset>
+			<a class="close" href="#close"></a>
+		</form>
+	</div>
+
+	<!--GRADIENT-->
+	<div class="gradient"></div>
+	<!--END GRADIENT-->
+
+</body>
+</html>

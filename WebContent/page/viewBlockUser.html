@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>BlockSiteSetting</title>
+<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+</head>
+
+<body bgcolor="#F0F4F7">
+	
+	<div id="titlediv" style="font-size: 30px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left: 0px;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	color: #1D1313;">
+			Block User List
+		</div>
+
+<?php
+  	$host = "localhost";
+		$user = "root";
+		$password = "aaaaaa";
+		$conn = mysql_connect($host, $user, $password);
+		$SGdb = "SGdb";
+		
+		mysql_select_db($SGdb, $conn);
+
+		$q = "select USER_ID, IP_ADDRESS, E_MAIL from USER where BLACK_FLAG='Y'"; 
+		$sql_result = mysql_query($q, $conn);          //����(�� ����)�� �����϶�.
+		
+		$count = mysql_num_rows($sql_result); 
+		
+		for($i = 0; $i < $count; $i++) {
+			 $User_ID[$i] = mysql_result($sql_result, $i, USER_ID);
+			 $User_IP[$i] = long2ip(mysql_result($sql_result, $i, IP_ADDRESS));
+			 $User_Email[$i] = mysql_result($sql_result, $i, E_MAIL);
+		}
+		
+		echo "
+					<div id=\"tablewrapper\">
+						<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" id=\"table\" class=\"tinytable\" >
+			            <thead>
+			                <tr>
+			                    <th class=\"nosort\"><h3>No.</h3></th>
+			                    <th><h3>User ID</h3></th>
+			                    <th><h3>IP Address</h3></th>
+			                    <th><h3>E-Mail</h3></th>
+			                </tr>
+			            </thead>
+						<tbody>
+					";
+						
+		for($i = 0; $i < $count; $i++){
+				echo "			
+							<tr>
+									<td>".($i + 1)."</td>
+									<td>$User_ID[$i]</td>
+									<td>$User_IP[$i]</td>	
+									<td>$User_Email[$i]</td>
+							</tr>
+				     ";
+		}
+		
+		echo "
+            </tbody>
+        </table>        
+    </div>
+    ";
+  
+  ?>
+  
+  	<div style="margin-top: 20px;">
+		<?PHP include_once ('../php/networkAnalysis/viewUserInfo.php');?>		
+		<?PHP include_once ('../php/networkAnalysis/viewUserInfo_Table.php');?>
+		
+			<script type="text/javascript" src="../js/viewTable/script.js"></script>
+			<script type="text/javascript">
+			var sorter = new TINY.table.sorter('sorter','table',{
+				headclass:'head',
+				ascclass:'asc',
+				descclass:'desc',
+				evenclass:'evenrow',
+				oddclass:'oddrow',
+				evenselclass:'evenselected',
+				oddselclass:'oddselected',
+				paginate:true,
+				size:30,
+				colddid:'columns',
+				currentid:'currentpage',
+				totalid:'totalpages',
+				startingrecid:'startrecord',
+				endingrecid:'endrecord',
+				totalrecid:'totalrecords',
+				hoverid:'selectedrow',
+				pageddid:'pagedropdown',
+				navid:'tablenav',
+				sortcolumn:1,
+				sortdir:1,
+				sum:[8],
+				avg:[6,7,8,9],
+				columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
+				init:true
+			});
+		  </script>
+	</div>
+</body>
+</html>

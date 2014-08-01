@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset="UTF-8" />
+<title>Untitled Document</title>
+	<link href="stylesheet.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="js/highcharts/js/highcharts.js" type="text/javascript"></script>
+</head>
+
+<body bgcolor="#F0F4F7">
+<?php
+		exec("cat /proc/cpuinfo", $systemOutput);
+		exec("cat /etc/issue.net", $systemOS);
+		exec("cat /proc/meminfo", $memoryInfo);
+		exec("cat /sys/class/net/eth0/statistics/rx_bytes", $receivedNetwork);
+		exec("cat /sys/class/net/eth0/statistics/tx_bytes", $transmittedNetwork);
+		exec("uptime", $systemUptime);
+		
+		for($i = 0; $i < count($systemOutput); $i++) {
+			//echo "$i : $systemOutput[$i]<br>";
+		}
+		
+		$cpuModel = split(":", $systemOutput[4]);
+		$cpuMHz = split(":", $systemOutput[6]);
+		$cpuCache = split(":", $systemOutput[7]);
+		$cpuCores = split(":", $systemOutput[11]);
+		$memorySize = split(":", $memoryInfo[0]);
+		$freeMemory = split(":", $memoryInfo[1]);
+		$cachedMemory = split(":", $memoryInfo[3]);
+		$receivedNetworkResource = round($receivedNetwork[0] / (1024 * 1024) * 100) / 100;
+		$transmitNetworkResource = round($transmittedNetwork[0] / (1024 * 1024) * 100) / 100;
+		$systemStartUptime = split(",", $systemUptime[0]);
+		/*
+		echo "CPU Model : $cpuModel[1]<br>";
+		echo "CPU Cores : $cpuCores[1] Cores<br>";
+		echo "CPU MHz : $cpuMHz[1] MHz<br>";
+		echo "CPU Cache Size : $cpuCache[1]<br>";
+		
+		echo "Memory Size : $memorySize[1]<br>";
+		echo "Free Memory : $freeMemory[1]<br>";
+		echo "Cached Memory : $cachedMemory[1]<br>";
+		
+		echo "System OS : $systemOS[0]<br>";
+		echo "System Uptime : $systemStartUptime[0]<br>";
+		
+		echo "Received Network Packet Size : $receivedNetworkResource MB<br>";
+		echo "Transmit Network Packet Size : $transmitNetworkResource MB<br>";
+		*/	
+?>  
+		<div id="titlediv">
+			System Infomation	
+		</div>
+		<div style="margin-top: 15px; margin-left: 20px; margin-bottom: 40px; display: inline-block;">
+				<table id="sysInfoTable" border="1" style="display: inline-block;">
+							<th colspan="2" id="tableheader1">CPU Infomation</th>
+							<tr>
+								<td id="tablelabel1">CPU Model</td> <td id="tabledata1"><?php echo"$cpuModel[1]"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel2">CPU Cores</td> <td id="tabledata2"><?php echo "$cpuCores[1] Cores"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel3">CPU MHz</td> <td id="tabledata3"><?php echo "$cpuMHz[1] MHz"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel4">CPU Cache Size</td> <td id="tabledata4"><?php echo"$cpuCache[1]"; ?></td>
+							</tr>
+							<tr>
+								<td colspan="2" id="tableheader2"><center><b>Memory Infomation</b></center></td>
+							</tr>
+							<tr>
+								<td id="tablelabel5">Memory Size</td> <td id="tabledata5"><?php echo"$memorySize[1]"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel6">Free Memory</td> <td id="tabledata6"><?php echo"$freeMemory[1]"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel7">Cached Memory</td> <td id="tabledata7"><?php echo"$cachedMemory[1]"; ?></td>
+							</tr>
+							<tr>
+								<td colspan="2" id="tableheader3"><center><b>System Infomation</b></center></td>
+							</tr>
+							<tr>
+								<td id="tablelabel8">System OS</td> <td id="tabledata8"><?php echo"$systemOS[0]"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel9">System Uptime</td> <td id="tabledata9"><?php echo"$systemStartUptime[0]"; ?></td>
+							</tr>
+							<tr>
+								<td colspan="2" id="tableheader4"><center><b>Network Infomation</b></center></td>
+							</tr>
+							<tr>
+								<td id="tablelabel10">Received Network Packet Size</td> <td id="tabledata10"><?php echo "$receivedNetworkResource MB"; ?></td>
+							</tr>
+							<tr>
+								<td id="tablelabel11">Transmit Network Packet Size</td> <td id="tabledata11"><?php echo"$transmitNetworkResource MB"; ?></td>
+							</tr>							
+				</table>	
+				
+				<?php
+						$host = "localhost";
+						$user = "root";
+						$password = "aaaaaa";
+						$conn = mysql_connect($host, $user, $password);
+						$SGdb = "SGdb";
+						
+						mysql_select_db($SGdb, $conn);
+						
+						$queryServer = "select INFO from EVENT where EVENT_ID = 'SERVER_BYTE_COUNT_LIMIT'";
+						$queryUser = "select INFO from EVENT where EVENT_ID = 'USER_BYTE_COUNT_LIMIT'";
+						
+						$sql_result_Server = mysql_query($queryServer, $conn);
+						$sql_result_User = mysql_query($queryUser, $conn);
+						
+						$server_Threshold = mysql_result($sql_result_Server, 0, INFO);
+						$user_Threshold = mysql_result($sql_result_User, 0, INFO);
+						
+						mysql_close($conn);
+				?>
+				
+				<div id="envSettingDiv" style="display: inline-block;">
+						<form id="envForm" name="envForm" method="post" action="updateSetting.php">
+						 		<table id="envSettingTable" border="1" style=" margin-left: 30px; margin-bottom: 322px;">
+						 				<tr>
+						 						<td colspan="2" id="settingLabel"><center><b>Topology Traffic Color Display Setting</b></center></td>
+						 				</tr>
+						 				<tr>
+						 						<td style="padding: 10px 20px 10px 20px;" id="ServerThresholdLabel">Server Traffic Color Threshold</td> <td id="ServerThreshold" > <input type="text" name="ServerThreshold" value="<?php echo $server_Threshold; ?>" size="5" style="text-align: center;"/> MB</td> 
+						 				</tr>
+						 				<tr>
+						 						<td style="padding: 10px 20px 10px 20px;" id="UserThresholdLabel">User Traffic Color Threshold</td> <td id="UserThreshold"> <input type="text" name="UserThreshold" value="<?php echo $user_Threshold; ?>" size="5" style="text-align: center;" /> MB</td>
+						 				</tr>
+						 				<tr style="border-left: 1px solid #F0F4F7; border-right: 1px solid #F0F4F7; border-bottom: 1px solid #F0F4F7;">
+						 						<td colspan="2" style="padding: 5px 5px 5px 20px;"> <input type="submit" name="Submit" id="Submit" value="submit" style="margin-left: 300px;"/> </td>
+						 				</tr>
+						 		</table>
+				 		</form>
+		    </div>
+			
+		</div> 
+		
+		
+		
+    <div id="Rxcontainer" style="width: 47%; display: inline-block; margin-right: 2%;  margin-left: 1%;">
+    	Rx Traffic Usage
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });           
+
+            var chart;
+            
+            function requestData() {
+                $.ajax({
+                    // url: 'live-server-data.php',
+                    url: 'getRx.php',
+                    success: function (point) {
+                        var series = chart.series[0];
+                        var y = Number(point);
+                        if(y < 0) y = 0; 
+                                                  
+                        chart.series[0].addPoint([(new Date()).getTime(), y], true, true);
+                        
+                        setTimeout(requestData, 10);
+                    },
+                    cache: false
+                });
+            }
+            
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'Rxcontainer',
+                    type: 'spline',
+                    height: 300,
+                    marginRight: 10,
+                    events: {
+                        load: requestData
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Receive Traffic'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+					Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+					Highcharts.numberFormat(this.y, 2) + 'KB';
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Rx Network Traffic',
+                    color: /*'#058DC7'*/ '#00C176',
+                    shadow: false,
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+					time = (new Date()).getTime(),
+					i;
+
+                        for (i = -19; i <= 0; i++) {
+                            data.push({
+                                x: time + i * 1000,
+                                y: 0
+                            });
+                        }
+                        return data;
+                    })()
+                }]
+            });
+        });
+    //]]>
+    </script>
+    
+    <div id="Txcontainer" style="width: 47%; display: inline-block;">
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });           
+
+            var chart;
+            
+            function requestData() {
+                $.ajax({
+                    // url: 'live-server-data.php',
+                    url: 'getTx.php',
+                    success: function (point) {
+                        var series = chart.series[0];
+                        var y = Number(point);
+                        if(y < 0) y = 0;
+                                                  
+                        chart.series[0].addPoint([(new Date()).getTime(), y], true, true);                        
+                        setTimeout(requestData, 10);
+                    },
+                    cache: false
+                });
+            }
+            
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'Txcontainer',
+                    type: 'spline',
+                    height: 300,
+                    marginRight: 10,
+                    events: {
+                        load: requestData
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Transmit Traffic'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+					Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+					Highcharts.numberFormat(this.y, 2) + 'KB';
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Tx Network Traffic',
+                    color: /*'#058DC7'*/ '#FF003C',
+                    shadow: false,
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+					time = (new Date()).getTime(),
+					i;
+
+                        for (i = -19; i <= 0; i++) {
+                            data.push({
+                                x: time + i * 1000,
+                                y: 0
+                            });
+                        }
+                        return data;
+                    })()
+                }]
+            });
+        });
+    //]]>
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="SecurityGate"
+	content="방화벽, SecurityGate, firewall, 케로베로스, Cerberus" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta http-equiv="refresh" content="30; url=./management.html"/>  -->
+<title>Security Gate</title>
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortchut icon" href="../img/common/icon_firewall.png" />
+<link rel="apple-touch-icon" href="../img/common/icon_firewall.png" />
+<!--scripts-->
+<!-- CSS Files -->
+<link type="text/css" href="../css/common/base.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="container">
+		<div id="top-container">
+			<?PHP include "./topStatus.html" ?>
+		</div>
+		<div id="left-container">
+			<?PHP include "./sideMenu/sideMenu.html" ?>
+		</div>
+		<div id="center-container">
+		  <iframe src='./viewNetworkTopology.html' name='centerFrame'></iframe>
+		</div>
+	</div>
+</body>
+</html>

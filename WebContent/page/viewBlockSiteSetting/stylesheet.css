@@ -1,0 +1,174 @@
+#BasicInputDiv {
+	float : left;
+	background:#fff;
+	padding: 6px;
+	display:block;
+	border: 1px solid #c6d5e1;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+
+#BlockSiteDiv {
+	float : left;
+	background:#fff;
+	padding: 6px;
+	display:block;
+	border: 1px solid #c6d5e1;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+
+#SignatureInputDiv {
+	float : left;
+	padding:6px;
+	border:1px solid #c6d5e1;
+	background:#fff;
+	padding: 6px;
+	display:block;	
+}
+
+#BlockSiteSubmitLine {
+	border-bottom: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+}
+
+#BasicRules {
+	border: 1px solid #c6d5e1; 	
+	border-collapse: collapse;
+}
+
+
+#BlockSiteTable {
+	border: 1px solid #c6d5e1; 	
+	border-collapse: collapse;
+}
+
+#Name {
+	width: 150px;
+}
+
+#WebSiteIP {
+	width: 150px;
+}
+
+#WebSiteURL {
+	width: 500px;
+}
+
+input {
+	display: block;
+}
+
+tr {
+	padding: 0px 0px 0px 0px;
+}
+
+#BasicRulesLabel {
+	font-size:12px;
+	text-align:left;
+	padding: 2px 6px 0px 2px;
+	background: #c6d5e1;
+	color: #fff;
+}
+
+#BlockSiteLabel {
+	font-size:12px;
+	text-align:left;
+	padding: 2px 6px 0px 2px;
+	background: #c6d5e1;
+	color: #fff;
+}
+
+#MessageLabel {
+	background: #c6d5e1;
+	color: #fff;
+	font-size:12px;
+	text-align:left;
+	font-weight: bold;
+	padding: 2px 6px 0px 2px;
+	background: #c6d5e1;
+}
+	
+#SignatureRulesLabel  {
+	background: #c6d5e1;
+	font-size:12px;
+	text-align:left;
+	font-weight: bold;
+	padding: 2px 6px 0px 2px;
+	background: #c6d5e1;
+	color: #fff;
+}
+
+#Message {
+	width: 628px;
+}
+
+#SourceIP {
+	width: 120px;
+}
+
+#SourcePort {
+	width: 90px;
+}
+
+#Signature {
+	width: 545px;
+}
+
+#DestinationIP {
+	width: 120px;
+}
+
+#DestinationPort {
+	width: 110px;
+}
+
+#Submit {
+	height: 25px;
+	width : 60px;
+}
+
+#SubmitLine {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+input {
+	float: left;
+	font-size: 14px;
+	height: 17px;
+}
+
+#titlediv {
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left: 0px;
+	padding-top: 5px;
+	padding-bottom : 10px;
+	color: #1D1313;
+}
+
+select {
+	float: left;
+	font-size: 12px;
+	width: 80px;
+	height: 23px;
+	padding: 2px 4px 4px;
+	-webkit-appearance: menulist;
+	box-sizing: border-box;
+	align-items: center;
+	border: 1px solid;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	white-space: pre;
+	-webkit-rtl-ordering: logical;
+	color: black;
+	background-color: white;
+	cursor: default;
+}

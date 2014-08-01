@@ -1,0 +1,102 @@
+
+<!-- popupManagerNode form -->
+<Div class="popup" id="popupManagerNode">
+	<a href="#x" class="overlay" id="popupManagerNode_form"></a>
+	<form name="popupManagerNode_form" method="post" action="" style=" margin-bottom: 0em;">
+<!--		<h2
+			style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">관리자
+			메뉴</h2>
+		 <p>Please select</p>   -->
+		<fieldset style="text-align: center;">
+			<button type="button" onclick="ViewUserAddLayer()">사용자 추가</button>
+			<br>
+			<button type="button" onclick="allUserBlock()">모든 사용자 차단</button>
+			<br>
+			<button type="button" onclick="allUserRelease()">모든 사용자 차단 해제</button>
+			<br>
+			<button type="button" onclick="allUserDelete()">모든 사용자 제거</button>
+			<br>
+		</fieldset>
+		<a class="close" href="#close"></a>
+
+	</form>
+</Div>
+
+<!-- popupServerNode form -->
+<Div class="popup" id="popupServerNode">
+	<a href="#x" class="overlay" id="popupServerNode_form"></a>
+	<form name="popupServerNode_form" method="post" action="" style=" margin-bottom: 0em;">
+		<!--				<h2
+						style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">사용자
+						메뉴</h2>-->
+		<!-- 	<p>Please select</p>   -->
+		<fieldset style="text-align: center;">
+			<button type="button" onclick="addServerBlockList()">외부 노드 차단</button>
+			<br>
+			<button type="button" onclick="releaseServerBlockList()">외부 노드 차단 해제</button>
+			<br>
+	<!--		<button type="button" onclick="testtest()">테스트 버튼</button>
+			<br>-->
+		</fieldset>
+		<a class="close" href="#close"></a>
+	</form>
+</Div>
+
+<!-- popupUserNode form -->
+<Div class="popup" id="popupUserNode">
+	<a href="#x" class="overlay" id="popupUserNode_form"></a>
+	<form name="popupUserNode_form" method="post" action="" style=" margin-bottom: 0em;">
+		<!--				<h2
+						style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">사용자
+						메뉴</h2>-->
+		<!-- 	<p>Please select</p>   -->
+		<fieldset style="text-align: center;">
+			<button type="button" onclick="addBlackList()">사용자 차단</button>
+			<br>
+			<button type="button" onclick="releaseBlackList()">사용자 차단 해제</button>
+			<br>
+			<button type="button" onclick="deleteUser()">사용자 제거</button>
+			<br>
+		</fieldset>
+		<a class="close" href="#close"></a>
+	</form>
+</Div>
+
+<!-- popupUserAdd form -->
+<Div class="popup" id="popupUserAddNode">
+	<a class="overlay" id="popupUserAddNode_form"></a>
+	<h2
+		style="font: bold 30px Century Gothic; text-shadow: rgb(110, 110, 110) 3px 3px 5px;">Add
+		User</h2>
+	<!-- 	<p>Please enter user details here</p> -->
+	<fieldset>
+		<legend> 유저 정보 </legend>
+		<div>
+			<label for="ID" autofocus>ID</label> <input type="text"
+				name="USER_ID" id="userId" value="" required="required"
+				autocomplete="on" maxlength="10" autofocus />
+		</div>
+		<div>
+			<label for="nickname" autofocus>NickName</label> <input type="text"
+				name="nickname" id="nickname" value="" required="required"
+				autocomplete="on" maxlength="10" autofocus />
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend> 주소 설정 </legend>
+		<div>
+			<label for="ipAddress">IP 주소</label> <input type="text"
+				name="IP_ADDRESS" id="ipAddress" value="" required="required"
+				maxlength="15" placeholder="---.---.---.---" />
+		</div>
+		<div>
+			<label for="macAddress">MAC 주소</label> <input type="text"
+				name="MAC_ADDRESS" id="macAddress" value="" required="required"
+				maxlength="17" placeholder="00-00-00-00-00-00" />
+		</div>
+	</fieldset>
+	<fieldset style="text-align: right;">
+		<button onClick="addUserSubmit()">Submit</button>
+	</fieldset>
+	<a class="close" href="#close"></a>
+</Div>

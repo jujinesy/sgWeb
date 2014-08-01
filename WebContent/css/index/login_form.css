@@ -1,0 +1,156 @@
+/* *********************************************************************************************
+
+ Login form tutorial (CSS3 + jQuery) [Tutorial]
+ "Login form tutorial (CSS3 + jQuery)" that was specially made for DesignModo by our friend Valeriu Timbuc.
+
+ Links:
+ http://vtimbuc.net/
+ https://twitter.com/vtimbuc
+ http://designmodo.com/futurico
+ http://vladimirkudinov.com
+ http://rockablethemes.com
+
+ ********************************************************************************************* */
+/* pop up */
+a#join_pop:hover {
+	border-color: #eee;
+}
+.overlay {
+	background-color: rgba(0, 0, 0, 0.6);
+	bottom: 0;
+	cursor: default;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	visibility: hidden;
+	z-index: 1;
+	-webkit-transition: opacity .5s;
+	-moz-transition: opacity .5s;
+	-ms-transition: opacity .5s;
+	-o-transition: opacity .5s;
+	transition: opacity .5s;
+}
+.overlay:target {
+	visibility: visible;
+	opacity: 1;
+}
+.popup {
+	background-color: #fff;
+	border: 3px solid #fff;
+	display: inline-block;
+	left: 50%;
+	opacity: 0;
+	padding: 15px;
+	position: fixed;
+	text-align: justify;
+	top: 40%;
+	visibility: hidden;
+	z-index: 10;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+	-moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+	-ms-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+	-o-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+	box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+	-webkit-transition: opacity .5s, top .5s;
+	-moz-transition: opacity .5s, top .5s;
+	-ms-transition: opacity .5s, top .5s;
+	-o-transition: opacity .5s, top .5s;
+	transition: opacity .5s, top .5s;
+}
+.overlay:target+ .popup {
+	top: 50%;
+	opacity: 1;
+	visibility: visible;
+}
+.close {
+	background-color: rgba(0, 0, 0, 0.8);
+	height: 30px;
+	line-height: 30px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	text-decoration: none;
+	top: -15px;
+	width: 30px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-ms-border-radius: 15px;
+	-o-border-radius: 15px;
+	border-radius: 15px;
+}
+.close:before {
+	color: rgba(255, 255, 255, 0.9);
+	content: "X";
+	font-size: 24px;
+	text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+.close:hover {
+	background-color: rgba(64, 128, 128, 0.8);
+}
+.popup p, .popup div {
+	margin-bottom: 10px;
+}
+.popup label {
+	display: inline-block;
+	text-align: left;
+	width: 120px;
+}
+.popup input[type="text"], .popup input[type="password"] {
+	border: 1px solid;
+	border-color: #999 #ccc #ccc;
+	margin: 0;
+	padding: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+}
+.popup input[type="text"]:hover, .popup input[type="password"]:hover {
+	border-color: #555 #888 #888;
+}
+
+legend {
+	color: #F66;
+	font: 19px 'Myriad Pro';
+	text-shadow: 2px 2px 4px #696969;
+	margin-bottom: 0.5em;
+}
+.popup button[type="submit"]{
+	style="
+    /* text-decoration: none; */  
+    width: 36%;  
+    /* background: #a5cd4e; */  background: -moz-linear-gradient(top, #a5cd4e 0%, #6b8f1a 100%);  
+    /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a5cd4e), color-stop(100%,#6b8f1a)); */  
+    background: -webkit-linear-gradient(top, #a5cd4e 0%,#6b8f1a 100%);
+    cursor: pointer;  
+    color: #445b0f;  
+    -webkit-box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .45), 0px 1px 1px 0px rgba(0,0,0, .3);  -moz-box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .45), 0px 1px 1px 0px rgba(0,0,0, .3);  
+    box-shadow: inset 1px 1px 1px 0px rgba(255,255,255, .45), 0px 1px 1px 0px rgba(0,0,0, .3);
+    line-height: 14px;  
+    margin: 10px 0;  
+    padding: 6px 15px;  
+    border: 0;  
+    outline: none;  
+    font-family: Helvetica, sans-serif;  
+    font-size: 12px;  
+    font-weight: bold;  
+    text-shadow: 0px 1px 1px rgba(255,255,255, .2);  
+    -webkit-border-radius: 26px;  -moz-border-radius: 26px;  
+    border-radius: 26px;  
+    -webkit-transition: all .15s ease-in-out;  -moz-transition: all .15s ease-in-out;  -o-transition: all .15s ease-in-out;  
+    transition: all .15s ease-in-out;
+"
+}

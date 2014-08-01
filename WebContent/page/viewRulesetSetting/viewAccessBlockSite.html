@@ -1,0 +1,21 @@
+select a.SITE_NAME, a.SITE_IP, a.SITE_URL, b.USER_ID from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR;
+
+
+
+select m.cnt, m.USER_ID, m.rank
+from
+(select t.cnt, t.USER_ID,
+(select count(*) + 1 
+from (select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as i
+where i.cnt > t.cnt) as rank 
+from 
+(select COUNT(a.SITE_IP) as cnt , b.USER_ID 
+from BLOCKSITE a, (select b.USER_ID, a.DST_ADDR from NETFLOWENTRY a inner join USER b on a.SRC_ADDR=b.IP_ADDRESS) b
+where a.SITE_IP=b.DST_ADDR 
+group by b.USER_ID) as t
+ORDER BY rank asc) as m
+where m.rank<5;

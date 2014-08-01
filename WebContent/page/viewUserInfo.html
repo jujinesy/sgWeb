@@ -1,0 +1,43 @@
+<?PHP
+header('Content-Type: text/html; charset=utf-8');
+session_cache_expire(1800);
+session_start();
+//echo $_SESSION["session__id"];
+//echo $_SESSION["session__pw"];
+?>
+<link rel="stylesheet" href="../css/viewTable/tableStyle.css" />
+<?PHP include_once ('../php/networkAnalysis/viewUserInfo.php');?>
+
+<body>
+<?PHP include_once ('../php/networkAnalysis/viewUserInfo_Table.php');?>
+	<script type="text/javascript" src="../js/viewTable/script.js"></script>
+	<script type="text/javascript">
+	var sorter = new TINY.table.sorter('sorter','table',{
+		headclass:'head',
+		ascclass:'asc',
+		descclass:'desc',
+		evenclass:'evenrow',
+		oddclass:'oddrow',
+		evenselclass:'evenselected',
+		oddselclass:'oddselected',
+		paginate:true,
+		size:30,
+		colddid:'columns',
+		currentid:'currentpage',
+		totalid:'totalpages',
+		startingrecid:'startrecord',
+		endingrecid:'endrecord',
+		totalrecid:'totalrecords',
+		hoverid:'selectedrow',
+		pageddid:'pagedropdown',
+		navid:'tablenav',
+		sortcolumn:1,
+		sortdir:1,
+		sum:[8],
+		avg:[6,7,8,9],
+		columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
+		init:true
+	});
+  </script>
+  <br><br> <br><br>
+</body>

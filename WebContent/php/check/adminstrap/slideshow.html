@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Fullscreen Slideshow | Adminstrap</title>
+    <!--bootstrap-->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--supersized-->
+    <link href="assets/supersized/css/supersized.css" rel="stylesheet">
+    <link href="assets/supersized/css/supersized.shutter.css" rel="stylesheet">
+    <!--app-->
+    <link href="assets/app/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!--Navigation-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="index.html">
+                    <img src="assets/app/img/logo.png" height="45" alt="logo" /></a>
+                <ul id="primary-nav" class="nav">
+                    <li><a href="dashboard.html"><i class="nav-icon-9"></i><span>Dashboard</span></a></li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="nav-icon-1"></i><span>
+                        Reports</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="report.html"><i class="icon-list-alt"></i>&nbsp;Report 1</a></li>
+                            <li><a href="report.html"><i class="icon-list-alt"></i>&nbsp;Report 2</a></li>
+                            <li><a href="report.html"><i class="icon-list-alt"></i>&nbsp;Report 3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="forms.html"><i class="nav-icon-12"></i><span>Forms</span></a></li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="nav-icon-11"></i><span>
+                        Gallery</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="slideshow.html"><i class="icon-play-circle"></i>&nbsp;Fullscreen Slideshow</a></li>
+                            <li><a href="gallery.html"><i class="icon-picture"></i>&nbsp;Image Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="calendar.html"><i class="nav-icon-10"></i><span>Calendar</span></a></li>
+                </ul>
+                <ul id="secondary-nav" class="nav pull-right">
+                    <li><a data-toggle="modal" href="#myModal"><i class="icon-user icon-white"></i>&nbsp;John
+                        Doe</a></li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"><i class="icon-cog icon-white">
+                    </i><span>Settings</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-wrench"></i>&nbsp;Site Config</a></li>
+                            <li><a href="#"><i class="icon-picture"></i>&nbsp;Themes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html"><i class="icon-off icon-white"></i>&nbsp;Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--Profile Form-->
+    <div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                ×</button>
+            <h3>
+                Profile</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+            <legend>Contact Info</legend>
+            <div class="control-group">
+                <label class="control-label" for="txtContactName">
+                    Name</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span>
+                        <input class="span4" id="txtContactName" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="txtPhone">
+                    Phone</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-comment"></i></span>
+                        <input class="span4" id="txtPhone" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="txtEmail">
+                    E-mail</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-envelope"></i></span>
+                        <input class="span4" id="txtEmail" type="text">
+                    </div>
+                </div>
+            </div>
+            <legend>Security Info</legend>
+            <div class="control-group">
+                <label class="control-label" for="txtLoginID">
+                    Login ID</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span>
+                        <input class="span4" id="txtLoginID" type="text" value="admin" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="txtPassword">
+                    Password
+                </label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-lock"></i></span>
+                        <input class="span4" id="txtPassword" type="password">
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a> <a href="#"
+                class="btn" data-dismiss="modal">Cancel</a>
+        </div>
+    </div>
+    <!--Thumbnail Navigation-->
+    <div id="prevthumb">
+    </div>
+    <div id="nextthumb">
+    </div>
+    <!--Arrow Navigation-->
+    <a id="prevslide" class="load-item"></a><a id="nextslide" class="load-item"></a>
+    <div id="thumb-tray" class="load-item">
+        <div id="thumb-back">
+        </div>
+        <div id="thumb-forward">
+        </div>
+    </div>
+    <!--Time Bar-->
+    <div id="progress-back" class="load-item">
+        <div id="progress-bar">
+        </div>
+    </div>
+    <!--Control Bar-->
+    <div id="controls-wrapper" class="load-item">
+        <div id="controls">
+            <a id="play-button">
+                <img id="pauseplay" src="assets/supersized/img/pause.png" alt="" /></a>
+            <!--Slide counter-->
+            <div id="slidecounter">
+                <span class="slidenumber"></span>/ <span class="totalslides"></span>
+            </div>
+            <!--Slide captions displayed here-->
+            <div id="slidecaption">
+            </div>
+            <!--Thumb Tray button-->
+            <a id="tray-button">
+                <img id="tray-arrow" src="assets/supersized/img/button-tray-up.png" alt="" /></a>
+            <!--Navigation-->
+            <ul id="slide-list">
+            </ul>
+        </div>
+    </div>
+    <!--jquery-->
+    <script src="assets/jquery/js/jquery-1.7.2.min.js"></script>
+    <!--bootstrap-->
+    <script src="assets/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-button.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-typeahead.js"></script>
+    <!--jquery ui-->
+    <script src="assets/jquery/js/jquery.easing.min.js"></script>
+    <script src="assets/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <!--supersized-->
+    <script src="assets/supersized/js/supersized.3.2.7.min.js"></script>
+    <script src="assets/supersized/js/supersized.shutter.min.js"></script>
+    <!--supersized init-->
+    <script>
+        jQuery(function ($) {
+            $.supersized({
+                // Functionality
+                slide_interval: 5000, 	// Length between transitions
+                transition: 1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+                transition_speed: 1000, 	// Speed of transition
+                // Components							
+                slide_links: 'blank', // Individual links for each slide (Options: false, 'number', 'name', 'blank')
+                slides: [			// Slideshow Images
+				   {image: 'assets/supersized/img/slides/bg1.jpg', title: 'Background 1 Caption', thumb: 'assets/supersized/img/slides/thumbs/bg1.jpg' },
+				   { image: 'assets/supersized/img/slides/bg2.jpg', title: 'Background 2 Caption', thumb: 'assets/supersized/img/slides/thumbs/bg2.jpg' },
+				   { image: 'assets/supersized/img/slides/bg3.jpg', title: 'Background 3 Caption', thumb: 'assets/supersized/img/slides/thumbs/bg3.jpg' }
+				]
+
+            });
+        });
+    </script>
+</body>
+</html>

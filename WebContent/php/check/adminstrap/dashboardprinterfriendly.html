@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard | Adminstrap</title>
+    <!--jquery-->
+    <link href="assets/jquery/css/jquery-ui-1.8.16.custom.css" rel="stylesheet">
+    <!--bootstrap-->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--app-->
+    <link href="assets/app/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        body
+        {
+            font-size: 10px;
+            background: white;
+            font-family: Arial, Verdana, Tahoma;
+            width: 960px;
+            padding-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <!--Container-->
+    <div class="container-fluid">
+        <!--Dashboad-->
+        <div id="columns" class="row-fluid">
+            <ul id="widget1" class="column ui-sortable unstyled">
+                <li id="Widget1" class="widget">
+                    <div class="widget-head">
+                        <span>Frequency & Recency</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget1" class="widget-iframe" style="overflow: hidden;" src="widgets/widget1.html">
+                        </iframe>
+                    </div>
+                </li>
+                <li id="Widget4" class="widget">
+                    <div class="widget-head">
+                        <span>Avg. Visit Duration by Territory</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget4" class="widget-iframe" style="overflow: hidden;" src="widgets/widget4.html">
+                        </iframe>
+                    </div>
+                </li>
+            </ul>
+            <ul id="widget2" class="column ui-sortable unstyled">
+                <li id="Widget2" class="widget">
+                    <div class="widget-head">
+                        <span>Daily Visits</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget3" class="widget-iframe" style="overflow: hidden;" src="widgets/widget3.html">
+                        </iframe>
+                    </div>
+                </li>
+                <li id="Widget5" class="widget">
+                    <div class="widget-head">
+                        <span>Visits and Pageviews by Devices</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget5" class="widget-iframe" style="overflow: hidden;" src="widgets/widget5.html">
+                        </iframe>
+                    </div>
+                </li>
+            </ul>
+            <ul id="widget3" class="column ui-sortable unstyled">
+                <li id="Widget3" class="widget">
+                    <div class="widget-head">
+                        <span>Visits by Traffic Type</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget2" class="widget-iframe" style="overflow: hidden;" src="widgets/widget2.html">
+                        </iframe>
+                    </div>
+                </li>
+                <li id="Widget6" class="widget">
+                    <div class="widget-head">
+                        <span>Live Random Data</span></div>
+                    <div class="widget-content">
+                        <iframe id="iframeWidget6" class="widget-iframe" style="overflow: hidden;" src="widgets/widget6.html">
+                        </iframe>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--jquery-->
+    <script src="assets/jquery/js/jquery-1.7.2.min.js"></script>
+    <!--bootstrap-->
+    <script src="assets/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-button.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap/js/bootstrap-typeahead.js"></script>
+    <!--jquery ui-->
+    <script src="assets/jquery/js/jquery.easing.min.js"></script>
+    <script src="assets/jquery/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <!--app-->
+    <script src="assets/app/js/script.js"></script>
+    <!--jquery init-->
+    <script>
+        $('document').ready(function () {
+            Dashboard.init();
+        });
+    </script>
+</body>
+</html>
